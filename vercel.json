@@ -1,5 +1,3 @@
 {
-  "buildCommand": "python build.py",
-  "outputDirectory": "build",
-  "installCommand": "pip install -r requirements.txt"
+  "outputDirectory": "build"
 }
