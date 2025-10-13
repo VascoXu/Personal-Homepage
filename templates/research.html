@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block nav_home %}text-gray-500{% endblock %}
+{% block nav_research %}underline underline-offset-8 decoration-2 decoration-pink-500{% endblock %}
+
+{% block title %}
+    Vasco Xu | Research
+{% endblock %}
+
+{% block body %}
+{% include 'publications.html' %}
+{% include 'thesis.html' %}
+{% endblock %}
