@@ -1,3 +1,6 @@
 {
-  "outputDirectory": "build"
+  "buildCommand": "echo 'Using pre-built files'",
+  "outputDirectory": "build",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
