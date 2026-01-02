@@ -1,0 +1,7 @@
+.link-gray {
+    color: rgb(55 65 81);
+    text-decoration: underline;
+    text-decoration-color: rgb(209 213 219);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 3px;
+  }
