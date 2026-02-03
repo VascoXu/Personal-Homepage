@@ -4,8 +4,8 @@ Static site generator for academic website.
 Converts Markdown publication files and HTML templates into static HTML pages.
 """
 
-import os
 import re
+import shutil
 import yaml
 from pathlib import Path
 
@@ -56,12 +56,11 @@ def render_publication_html(pub):
     teaser_html = f'<img src="{pub["teaser"]}" class="object-contain mx-auto" alt="{pub["title"]} Teaser">' if pub.get("teaser") else ''
 
     # Format authors (markdown bold ** to HTML)
-    authors = pub.get("authors", "").replace("**", "<span class='font-semibold'>").replace("**", "</span>")
-    authors = re.sub(r'\*\*([^*]+)\*\*', r'<span class="font-semibold">\1</span>', pub.get("authors", ""))
+    authors = re.sub(r'\*\*([^*]+)\*\*', r'<span class="font-medium">\1</span>', pub.get("authors", ""))
 
     html = f'''
     <!-- Publication Entry -->
-    <div class="flex flex-col md:flex-row bg-white mt-8">
+    <div class="flex flex-col md:flex-row md:items-center bg-white mt-8">
       <!-- Teaser Image -->
       <div class="md:w-1/4 mt-1">
         {teaser_html}
@@ -70,8 +69,8 @@ def render_publication_html(pub):
       <!-- Pub. Description -->
       <div class="md:w-2/3 md:pl-6">
         <h2 class="text-lg font-semibold text-gray-900 md:mt-0">{pub["title"]}</h2>
-        <div class="mt-2 text-gray-600">{authors}</div>
-        <div class="uppercase text-base mt-0.5 text-gray-600 font-bold">{pub["conference"]}{f' <span class="text-red-800 font-medium">{pub["special_notes"]}</span>' if pub.get("special_notes") else ''}</div>
+        <div class="mt-2 text-gray-600 font-light">{authors}</div>
+        <div class="uppercase text-base mt-1 text-gray-600 font-bold">{pub["conference"]}{f' <span class="text-red-800 font-medium">{pub["special_notes"]}</span>' if pub.get("special_notes") else ''}</div>
         <!-- Links -->
         <div class="mt-2">
           {paper_link}
@@ -83,109 +82,24 @@ def render_publication_html(pub):
     '''
     return html
 
-def render_featured_publication_html(pub):
-    """Render a featured publication for the homepage."""
-    authors = re.sub(r'\*\*([^*]+)\*\*', r'<span class="font-semibold">\1</span>', pub.get("authors", ""))
-
-    paper_link = f'<a href="{pub["paper_url"]}" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">paper</a>' if pub.get("paper_url") else ''
-    video_link = f'<a href="{pub["video_url"]}" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">video</a>' if pub.get("video_url") else ''
-    code_link = f'<a href="{pub["code_url"]}" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">code</a>' if pub.get("code_url") else ''
-
-    links = [link for link in [paper_link, video_link, code_link] if link]
-    links_html = '<span class="text-gray-300">|</span>'.join(links)
-
-    teaser_html = f'<img class="h-36 w-full object-contain" src="{pub["teaser"]}" alt="{pub["title"]} Teaser">' if pub.get("teaser") else ''
-
-    html = f'''
-      <!-- Featured Publication -->
-      <div class="md:flex md:items-center">
-        <div class="md:flex-shrink-0">
-          {teaser_html}
-        </div>
-        <div class="p-8 flex-1">
-          <h2 class="text-lg font-semibold text-gray-900 md:mt-0">{pub["title"]}</h2>
-          <div class="mt-2 text-gray-600 whitespace-nowrap">{authors}</div>
-          <div class="uppercase text-base mt-1 text-gray-600 font-bold">{pub["conference"]}{f' <span class="text-red-800 font-medium">{pub["special_notes"]}</span>' if pub.get("special_notes") else ''}</div>
-          <div class="flex space-x-2 mt-2">
-            <span class="text-gray-600">[</span>
-            {links_html}
-            <span class="text-gray-600">]</span>
-          </div>
-        </div>
-      </div>
-    '''
-    return html
-
-def generate_research_html(publications):
-    """Generate research.html content."""
-    regular_pubs = [p for p in publications if p.get('type') != 'thesis' and not p.get('hidden')]
-    theses = [p for p in publications if p.get('type') == 'thesis']
-
-    pubs_html = []
-    for pub in regular_pubs:
-        pubs_html.append(render_publication_html(pub))
-
-    thesis_html = []
-    for thesis in theses:
-        thesis_html.append(render_thesis_html(thesis))
-
-    publications_section = '''
-<div class="container mx-auto max-w-7xl mt-8 px-8 py-8">
-  <h2 class="text-3xl font-light text-gray-900 mb-4">Publications</h2>
-''' + '\n  <hr class="my-8 border-gray-200" />\n'.join(pubs_html) + '\n</div>'
-
-    # thesis_section = ''
-    # if thesis_html:
-    #     thesis_section = '''
-    # <div class="container mx-auto max-w-7xl mt-8 px-8 py-8">
-    #   <h2 class="text-3xl font-light text-gray-900 mb-4">Theses</h2>
-    #   <hr class="my-1 border-gray-200" />
-    # ''' + '\n'.join(thesis_html) + '\n</div>'
-
-    return publications_section
-
-def render_thesis_html(thesis):
-    """Render thesis entry."""
-    authors = re.sub(r'\*\*([^*]+)\*\*', r'<span class="font-semibold">\1</span>', thesis.get("authors", ""))
-
-    paper_link = f'<a href="{thesis["paper_url"]}" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">paper</span> ]</a>' if thesis.get("paper_url") else ''
-
-    html = f'''
-  <!-- Thesis Entry -->
-  <div class="flex flex-col md:flex-row bg-white mt-8">
-    <div class="md:w-2/3">
-      <h2 class="text-lg font-semibold text-gray-900 md:mt-0">{thesis["title"]}</h2>
-      <div class="mt-2 text-gray-600">{authors}</div>
-      <div class="uppercase text-base mt-0.5 text-gray-600 font-bold">{thesis["conference"]}{f' | <span class="text-red-800 font-medium">{thesis["special_notes"]}</span>' if thesis.get("special_notes") else ''}</div>
-      <div class="mt-2">
-        {paper_link}
-      </div>
-    </div>
-  </div>
-    '''
-    return html
-
 def generate_highlights_html(publications):
     """Generate highlights section for homepage."""
     featured = [p for p in publications if p.get('featured', False)]
 
     pubs_html = []
     for pub in featured:
-        pubs_html.append(render_featured_publication_html(pub))
+        pubs_html.append(render_publication_html(pub))
 
     html = '''
 <!-- Publications -->
 <div class="container mx-auto max-w-7xl px-6 py-8">
   <div class="flex flex-col">
     <div class="mb-4">
-      <div class="flex items-baseline space-x-4">
-        <h2 class="text-2xl font-bold">Selected Publications</h2>
-        <a href="research.html" class="text-indigo-600 hover:text-indigo-800 hover:underline hover:underline-offset-4 text-base">[ Full List ]</a>
-      </div>
+      <h2 class="text-2xl font-bold">Selected Publications</h2>
     </div>
     <hr class="my-1 border-gray-200" />
     <div class="bg-white overflow-hidden">
-''' + '\n'.join(pubs_html) + '''
+''' + '\n  <hr class="my-8 border-gray-200" />\n'.join(pubs_html) + '''
     </div>
   </div>
 </div>
@@ -200,9 +114,6 @@ def build_static_site():
 
     # Load publications
     publications = load_publications()
-
-    # Generate research page content
-    research_content = generate_research_html(publications)
 
     # Generate highlights for homepage
     highlights_content = generate_highlights_html(publications)
@@ -226,7 +137,6 @@ def build_static_site():
     # Replace Jinja2 syntax with actual content
     index_html = layout.replace('{% block title %}{% endblock %}', 'Vasco Xu')
     index_html = index_html.replace('{% block nav_home %}{% endblock %}', 'underline underline-offset-8 decoration-2 decoration-pink-500')
-    index_html = index_html.replace('{% block nav_research %}{% endblock %}', 'text-gray-500')
     index_html = index_html.replace("{{url_for('static',filename='dist/css/tailwind.css')}}", 'static/dist/css/tailwind.css')
     # Handle body block with flexible whitespace matching
     index_html = re.sub(r'{%\s*block\s+body\s*%}.*?{%\s*endblock\s*%}', body_content, index_html, flags=re.DOTALL)
@@ -234,44 +144,25 @@ def build_static_site():
     # Remove the tailwind config script since we're using compiled CSS
     index_html = re.sub(r'<script>\s*tailwind\.config = \{.*?\}\s*</script>', '', index_html, flags=re.DOTALL)
 
+    # Remove Research nav links
+    index_html = re.sub(r'<a href="/research"[^>]*>RESEARCH</a>', '', index_html)
+
     # Fix navigation links
     index_html = index_html.replace('href="/"', 'href="index.html"')
-    index_html = index_html.replace('href="/research"', 'href="research.html"')
 
     # Write index.html
     with open(f"{OUTPUT_DIR}/index.html", 'w', encoding='utf-8') as f:
         f.write(index_html)
 
-    # Generate research.html
-    research_html = layout.replace('{% block title %}{% endblock %}', 'Vasco Xu | Research')
-    research_html = research_html.replace('{% block nav_home %}{% endblock %}', 'text-gray-500')
-    research_html = research_html.replace('{% block nav_research %}{% endblock %}', 'underline underline-offset-8 decoration-2 decoration-pink-500')
-    research_html = research_html.replace("{{url_for('static',filename='dist/css/tailwind.css')}}", 'static/dist/css/tailwind.css')
-    # Handle body block with flexible whitespace matching
-    research_html = re.sub(r'{%\s*block\s+body\s*%}.*?{%\s*endblock\s*%}', research_content, research_html, flags=re.DOTALL)
-    research_html = research_html.replace('href="/"', 'href="index.html"')
-    research_html = research_html.replace('href="/research"', 'href="research.html"')
-
-    # Remove the tailwind config script since we're using compiled CSS
-    research_html = re.sub(r'<script>\s*tailwind\.config = \{.*?\}\s*</script>', '', research_html, flags=re.DOTALL)
-
-    # Write research.html
-    with open(f"{OUTPUT_DIR}/research.html", 'w', encoding='utf-8') as f:
-        f.write(research_html)
-
-    # Copy static files (symlink or copy)
+    # Copy static files
     static_output = output_path / "static"
     if static_output.exists():
-        import shutil
         shutil.rmtree(static_output)
-
-    import shutil
     shutil.copytree(STATIC_DIR, static_output)
 
     print(f"✓ Static site generated in '{OUTPUT_DIR}/' directory")
     print(f"✓ Generated {len(publications)} publications")
     print(f"  - index.html")
-    print(f"  - research.html")
 
 if __name__ == "__main__":
     build_static_site()

@@ -17,52 +17,12 @@
     <nav class="bg-white">
       <div class="mx-auto max-w-7xl mt-6 px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
-          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <!-- Mobile menu button-->
-            <button type="button" onclick="toggleMobileMenu()" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-              <span class="absolute -inset-0.5"></span>
-              <span class="sr-only">Open main menu</span>
-              <!--
-                Icon when menu is closed.
-
-                Menu open: "hidden", Menu closed: "block"
-              -->
-              <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-              <!--
-                Icon when menu is open.
-
-                Menu open: "block", Menu closed: "hidden"
-              -->
-              <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
           <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <!-- Name -->
             <div class="flex flex-shrink-0 items-center">
               <a href="index.html" class="text-3xl font-bold">VASCO XU</a>
             </div>
-
-            <!-- Navigation Links (centered with margin auto on both sides) -->
-            <div class="hidden lg:flex justify-end items-center space-x-8 md:flex-1">
-              <div class="flex space-x-4">
-                <a href="index.html" class="text-base underline underline-offset-8 decoration-2 decoration-pink-500 hover:text-black hover:underline hover:underline-offset-8 hover:decoration-2 hover:decoration-pink-500 rounded-md px-3 py-2" aria-current="page">HOME</a>
-                <a href="research.html" class="text-base text-gray-500 hover:text-black hover:underline hover:underline-offset-8 hover:decoration-2 hover:decoration-pink-500 rounded-md px-3 py-2">RESEARCH</a>
-              </div>
-            </div>
-
           </div>
-        </div>
-      </div>
-
-      <!-- Mobile menu, show/hide based on menu state. -->
-      <div class="sm:hidden" id="mobile-menu">
-        <div class="space-y-1 px-2 pb-3 pt-2">
-          <a href="index.html" class="text-gray-500 hover:bg-red-600 hover:text-white block rounded-md px-2 py-2 text-base font-medium">HOME</a>
-          <a href="research.html" class="text-gray-500 hover:bg-red-600 hover:text-white block rounded-md px-2 py-2 text-base font-medium">RESEARCH</a>
         </div>
       </div>
     </nav>
@@ -93,10 +53,10 @@
 <!-- Image + Links -->
 <div class="md:w-1/4 lg:w-1/3 md:ml-8 text-center">
   <img src="static/assets/imgs/Miguel.jpg" alt="Vasco Xu" class="object-contain max-w-xs mx-auto">
-  <div class="flex justify-center mt-4">
-    <a href="static/assets/docs/VascoXu_CV.pdf" target="_blank" class="text-red-600 font-semibold hover:text-red-900 hover:underline hover:underline-offset-8 hover:decoration-1 hover:decoration-red-900 mx-2">[ CV ]</a>
-    <a href="https://scholar.google.com/citations?user=X8SfS5YAAAAJ&hl=en" target="_blank" class="text-red-600 font-semibold hover:text-red-900 hover:underline hover:underline-offset-8 hover:decoration-1 hover:decoration-red-900 mx-2">[ SCHOLAR ]</a>
-    <a href="mailto:vascoxu@uchicago.edu" class="text-red-600 font-semibold hover:text-red-900 hover:underline hover:underline-offset-8 hover:decoration-1 hover:decoration-red-900 mx-2">[ EMAIL ]</a>
+  <div class="flex flex-row flex-wrap justify-center items-center mt-4">
+    <a href="static/assets/docs/VascoXu_CV.pdf" target="_blank" class="whitespace-nowrap text-red-600 font-semibold hover:text-red-900 hover:underline hover:underline-offset-8 hover:decoration-1 hover:decoration-red-900 mx-2">[&nbsp;CV&nbsp;]</a>
+    <a href="https://scholar.google.com/citations?user=X8SfS5YAAAAJ&hl=en" target="_blank" class="whitespace-nowrap text-red-600 font-semibold hover:text-red-900 hover:underline hover:underline-offset-8 hover:decoration-1 hover:decoration-red-900 mx-2">[&nbsp;SCHOLAR&nbsp;]</a>
+    <a href="mailto:vascoxu@uchicago.edu" class="whitespace-nowrap text-red-600 font-semibold hover:text-red-900 hover:underline hover:underline-offset-8 hover:decoration-1 hover:decoration-red-900 mx-2">[&nbsp;EMAIL&nbsp;]</a>
   </div>
 </div>
 
@@ -108,66 +68,100 @@
 <div class="container mx-auto max-w-7xl px-6 py-8">
   <div class="flex flex-col">
     <div class="mb-4">
-      <div class="flex items-baseline space-x-4">
-        <h2 class="text-2xl font-bold">Selected Publications</h2>
-        <a href="research.html" class="text-indigo-600 hover:text-indigo-800 hover:underline hover:underline-offset-4 text-base">[ Full List ]</a>
-      </div>
+      <h2 class="text-2xl font-bold">Selected Publications</h2>
     </div>
     <hr class="my-1 border-gray-200" />
     <div class="bg-white overflow-hidden">
 
-      <!-- Featured Publication -->
-      <div class="md:flex md:items-center">
-        <div class="md:flex-shrink-0">
-          <img class="h-36 w-full object-contain" src="static/assets/pubs/teasers/SurfaceXR-new.gif" alt="SurfaceXR: Fusing Smartwatch IMUs and Egocentric Hand Pose for Seamless Surface Interactions Teaser">
-        </div>
-        <div class="p-8 flex-1">
-          <h2 class="text-lg font-semibold text-gray-900 md:mt-0">SurfaceXR: Fusing Smartwatch IMUs and Egocentric Hand Pose for Seamless Surface Interactions</h2>
-          <div class="mt-2 text-gray-600 whitespace-nowrap"><span class="font-semibold">Vasco Xu</span>, Brian Chen, Eric J Gonzalez, Andrea Colaço, Henry Hoffmann, Mar Gonzalez-Franco, Karan Ahuja</div>
-          <div class="uppercase text-base mt-1 text-gray-600 font-bold">IEEE VR '26 <span class="text-red-800 font-medium">(TVCG Special Issue)</span></div>
-          <div class="flex space-x-2 mt-2">
-            <span class="text-gray-600">[</span>
-            <a href="https://dl.acm.org/doi/pdf/10.1145/3716553.3750775" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">paper</a><span class="text-gray-300">|</span><a href="https://www.youtube.com/watch?v=kKn3T5r7iHs" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">video</a>
-            <span class="text-gray-600">]</span>
-          </div>
-        </div>
+    <!-- Publication Entry -->
+    <div class="flex flex-col md:flex-row md:items-center bg-white mt-8">
+      <!-- Teaser Image -->
+      <div class="md:w-1/4 mt-1">
+        <img src="static/assets/pubs/teasers/SurfaceXR.gif" class="object-contain mx-auto" alt="SurfaceXR: Fusing Smartwatch IMUs and Egocentric Hand Pose for Seamless Surface Interactions Teaser">
       </div>
-    
 
-      <!-- Featured Publication -->
-      <div class="md:flex md:items-center">
-        <div class="md:flex-shrink-0">
-          <img class="h-36 w-full object-contain" src="static/assets/pubs/teasers/WatchHAR.gif" alt="WatchHAR: Real-time On-device Human Activity Recognition System for Smartwatches Teaser">
-        </div>
-        <div class="p-8 flex-1">
-          <h2 class="text-lg font-semibold text-gray-900 md:mt-0">WatchHAR: Real-time On-device Human Activity Recognition System for Smartwatches</h2>
-          <div class="mt-2 text-gray-600 whitespace-nowrap">Taeyoung Yeon, <span class="font-semibold">Vasco Xu</span>, Henry Hoffmann, Karan Ahuja</div>
-          <div class="uppercase text-base mt-1 text-gray-600 font-bold">ICMI '25</div>
-          <div class="flex space-x-2 mt-2">
-            <span class="text-gray-600">[</span>
-            <a href="https://dl.acm.org/doi/pdf/10.1145/3716553.3750775" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">paper</a><span class="text-gray-300">|</span><a href="https://www.youtube.com/watch?v=kKn3T5r7iHs" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">video</a><span class="text-gray-300">|</span><a href="https://github.com/SPICExLAB/WatchHAR" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">code</a>
-            <span class="text-gray-600">]</span>
-          </div>
+      <!-- Pub. Description -->
+      <div class="md:w-2/3 md:pl-6">
+        <h2 class="text-lg font-semibold text-gray-900 md:mt-0">SurfaceXR: Fusing Smartwatch IMUs and Egocentric Hand Pose for Seamless Surface Interactions</h2>
+        <div class="mt-2 text-gray-600 font-light"><span class="font-medium">Vasco Xu</span>, Brian Chen, Eric J Gonzalez, Andrea Colaço, Henry Hoffmann, Mar Gonzalez-Franco, Karan Ahuja</div>
+        <div class="uppercase text-base mt-1 text-gray-600 font-bold">IEEE VR '26 <span class="text-red-800 font-medium">(TVCG Special Issue)</span></div>
+        <!-- Links -->
+        <div class="mt-2">
+          
+          
+          
         </div>
       </div>
+    </div>
     
+  <hr class="my-8 border-gray-200" />
 
-      <!-- Featured Publication -->
-      <div class="md:flex md:items-center">
-        <div class="md:flex-shrink-0">
-          <img class="h-36 w-full object-contain" src="static/assets/pubs/teasers/MobilePoser.gif" alt="MobilePoser: Real-Time Full-Body Pose Estimation and 3D Human Translation from IMUs in Mobile Consumer Devices Teaser">
-        </div>
-        <div class="p-8 flex-1">
-          <h2 class="text-lg font-semibold text-gray-900 md:mt-0">MobilePoser: Real-Time Full-Body Pose Estimation and 3D Human Translation from IMUs in Mobile Consumer Devices</h2>
-          <div class="mt-2 text-gray-600 whitespace-nowrap"><span class="font-semibold">Vasco Xu</span>, Chenfeng Gao, Henry Hoffmann, Karan Ahuja</div>
-          <div class="uppercase text-base mt-1 text-gray-600 font-bold">UIST '24</div>
-          <div class="flex space-x-2 mt-2">
-            <span class="text-gray-600">[</span>
-            <a href="https://dl.acm.org/doi/10.1145/3654777.3676461" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">paper</a><span class="text-gray-300">|</span><a href="https://www.youtube.com/watch?v=cN75eFHdCyE&ab_channel=SPICELab" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">video</a><span class="text-gray-300">|</span><a href="https://github.com/SPICExLAB/MobilePoser" target="_blank" class="text-gray-600 underline underline-offset-4 hover:text-black hover:underline hover:decoration-pink-500">code</a>
-            <span class="text-gray-600">]</span>
-          </div>
+    <!-- Publication Entry -->
+    <div class="flex flex-col md:flex-row md:items-center bg-white mt-8">
+      <!-- Teaser Image -->
+      <div class="md:w-1/4 mt-1">
+        <img src="static/assets/pubs/teasers/WatchHAR.gif" class="object-contain mx-auto" alt="WatchHAR: Real-time On-device Human Activity Recognition System for Smartwatches Teaser">
+      </div>
+
+      <!-- Pub. Description -->
+      <div class="md:w-2/3 md:pl-6">
+        <h2 class="text-lg font-semibold text-gray-900 md:mt-0">WatchHAR: Real-time On-device Human Activity Recognition System for Smartwatches</h2>
+        <div class="mt-2 text-gray-600 font-light">Taeyoung Yeon, <span class="font-medium">Vasco Xu</span>, Henry Hoffmann, Karan Ahuja</div>
+        <div class="uppercase text-base mt-1 text-gray-600 font-bold">ICMI '25</div>
+        <!-- Links -->
+        <div class="mt-2">
+          <a href="https://dl.acm.org/doi/pdf/10.1145/3716553.3750775" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">paper</span> ]</a>
+          <a href="https://www.youtube.com/watch?v=kKn3T5r7iHs" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">video</span> ]</a>
+          <a href="https://github.com/SPICExLAB/WatchHAR" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">code</span> ]</a>
         </div>
       </div>
+    </div>
+    
+  <hr class="my-8 border-gray-200" />
+
+    <!-- Publication Entry -->
+    <div class="flex flex-col md:flex-row md:items-center bg-white mt-8">
+      <!-- Teaser Image -->
+      <div class="md:w-1/4 mt-1">
+        <img src="static/assets/pubs/teasers/MobilePoser.gif" class="object-contain mx-auto" alt="MobilePoser: Real-Time Full-Body Pose Estimation and 3D Human Translation from IMUs in Mobile Consumer Devices Teaser">
+      </div>
+
+      <!-- Pub. Description -->
+      <div class="md:w-2/3 md:pl-6">
+        <h2 class="text-lg font-semibold text-gray-900 md:mt-0">MobilePoser: Real-Time Full-Body Pose Estimation and 3D Human Translation from IMUs in Mobile Consumer Devices</h2>
+        <div class="mt-2 text-gray-600 font-light"><span class="font-medium">Vasco Xu</span>, Chenfeng Gao, Henry Hoffmann, Karan Ahuja</div>
+        <div class="uppercase text-base mt-1 text-gray-600 font-bold">UIST '24</div>
+        <!-- Links -->
+        <div class="mt-2">
+          <a href="https://dl.acm.org/doi/10.1145/3654777.3676461" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">paper</span> ]</a>
+          <a href="https://www.youtube.com/watch?v=cN75eFHdCyE&ab_channel=SPICELab" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">video</span> ]</a>
+          <a href="https://github.com/SPICExLAB/MobilePoser" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">code</span> ]</a>
+        </div>
+      </div>
+    </div>
+    
+  <hr class="my-8 border-gray-200" />
+
+    <!-- Publication Entry -->
+    <div class="flex flex-col md:flex-row md:items-center bg-white mt-8">
+      <!-- Teaser Image -->
+      <div class="md:w-1/4 mt-1">
+        <img src="static/assets/pubs/teasers/Xs.gif" class="object-contain mx-auto" alt="Xs: Interactive Scissor Mechanisms as Portable and Customizable Shape-Changing Interfaces Teaser">
+      </div>
+
+      <!-- Pub. Description -->
+      <div class="md:w-2/3 md:pl-6">
+        <h2 class="text-lg font-semibold text-gray-900 md:mt-0">Xs: Interactive Scissor Mechanisms as Portable and Customizable Shape-Changing Interfaces</h2>
+        <div class="mt-2 text-gray-600 font-light"><span class="font-medium">Vasco Xu</span>, Ken Nakagaki</div>
+        <div class="uppercase text-base mt-1 text-gray-600 font-bold">TEI '23</div>
+        <!-- Links -->
+        <div class="mt-2">
+          <a href="https://dl.acm.org/doi/abs/10.1145/3569009.3572737" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">paper</span> ]</a>
+          <a href="https://www.youtube.com/watch?v=9eFHDUBVYdI&ab_channel=AxLab-ActuatedExperienceLab" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">video</span> ]</a>
+          
+        </div>
+      </div>
+    </div>
     
     </div>
   </div>
