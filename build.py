@@ -69,9 +69,9 @@ def render_publication_html(pub):
 
       <!-- Pub. Description -->
       <div class="md:w-2/3 md:pl-6">
-        <h2 class="text-xl font-semibold text-gray-900 md:mt-0">{pub["title"]}</h2>
-        <div class="uppercase tracking-wide text-sm mt-1"><span class="text-gray-600 font-bold">{pub["conference"]}:</span> <span class="text-red-800 font-medium">{pub["conference_full"]}</span></div>
-        <p class="mt-2 text-gray-600">{authors}</p>
+        <h2 class="text-lg font-semibold text-gray-900 md:mt-0">{pub["title"]}</h2>
+        <div class="mt-2 text-gray-600">{authors}</div>
+        <div class="uppercase text-base mt-0.5 text-gray-600 font-bold">{pub["conference"]}{f' <span class="text-red-800 font-medium">{pub["special_notes"]}</span>' if pub.get("special_notes") else ''}</div>
         <!-- Links -->
         <div class="mt-2">
           {paper_link}
@@ -94,7 +94,7 @@ def render_featured_publication_html(pub):
     links = [link for link in [paper_link, video_link, code_link] if link]
     links_html = '<span class="text-gray-300">|</span>'.join(links)
 
-    teaser_html = f'<img class="h-36 w-full object-cover" src="{pub["teaser"]}" alt="{pub["title"]} Teaser">' if pub.get("teaser") else ''
+    teaser_html = f'<img class="h-36 w-full object-contain" src="{pub["teaser"]}" alt="{pub["title"]} Teaser">' if pub.get("teaser") else ''
 
     html = f'''
       <!-- Featured Publication -->
@@ -102,18 +102,14 @@ def render_featured_publication_html(pub):
         <div class="md:flex-shrink-0">
           {teaser_html}
         </div>
-        <div class="p-8">
-          <h2 class="text-xl font-semibold text-gray-900 md:mt-0">{pub["title"]}</h2>
-          <div class="uppercase tracking-wide text-sm mt-1"><span class="text-gray-600 font-bold">{pub["conference"]}:</span> <span class="text-red-800 font-medium">{pub["conference_full"]}</span></div>
-          <p class="mt-2 text-gray-600">{authors}</p>
-          <div class="flex mt-2">
-            <div class="p-1">
-              <div class="flex space-x-2 justify-center md:justify-start">
-                <span class="text-gray-600">[</span>
-                {links_html}
-                <span class="text-gray-600">]</span>
-              </div>
-            </div>
+        <div class="p-8 flex-1">
+          <h2 class="text-lg font-semibold text-gray-900 md:mt-0">{pub["title"]}</h2>
+          <div class="mt-2 text-gray-600 whitespace-nowrap">{authors}</div>
+          <div class="uppercase text-base mt-1 text-gray-600 font-bold">{pub["conference"]}{f' <span class="text-red-800 font-medium">{pub["special_notes"]}</span>' if pub.get("special_notes") else ''}</div>
+          <div class="flex space-x-2 mt-2">
+            <span class="text-gray-600">[</span>
+            {links_html}
+            <span class="text-gray-600">]</span>
           </div>
         </div>
       </div>
@@ -122,7 +118,7 @@ def render_featured_publication_html(pub):
 
 def generate_research_html(publications):
     """Generate research.html content."""
-    regular_pubs = [p for p in publications if p.get('type') != 'thesis']
+    regular_pubs = [p for p in publications if p.get('type') != 'thesis' and not p.get('hidden')]
     theses = [p for p in publications if p.get('type') == 'thesis']
 
     pubs_html = []
@@ -138,15 +134,15 @@ def generate_research_html(publications):
   <h2 class="text-3xl font-light text-gray-900 mb-4">Publications</h2>
 ''' + '\n  <hr class="my-8 border-gray-200" />\n'.join(pubs_html) + '\n</div>'
 
-    thesis_section = ''
-    if thesis_html:
-        thesis_section = '''
-<div class="container mx-auto max-w-7xl mt-8 px-8 py-8">
-  <h2 class="text-3xl font-light text-gray-900 mb-4">Theses</h2>
-  <hr class="my-1 border-gray-200" />
-''' + '\n'.join(thesis_html) + '\n</div>'
+    # thesis_section = ''
+    # if thesis_html:
+    #     thesis_section = '''
+    # <div class="container mx-auto max-w-7xl mt-8 px-8 py-8">
+    #   <h2 class="text-3xl font-light text-gray-900 mb-4">Theses</h2>
+    #   <hr class="my-1 border-gray-200" />
+    # ''' + '\n'.join(thesis_html) + '\n</div>'
 
-    return publications_section + thesis_section
+    return publications_section
 
 def render_thesis_html(thesis):
     """Render thesis entry."""
@@ -158,9 +154,9 @@ def render_thesis_html(thesis):
   <!-- Thesis Entry -->
   <div class="flex flex-col md:flex-row bg-white mt-8">
     <div class="md:w-2/3">
-      <h2 class="text-xl font-semibold text-gray-900 md:mt-0">{thesis["title"]}</h2>
-      <div class="uppercase tracking-wide text-sm mt-1"><span class="text-gray-600 font-bold">{thesis["conference"]}</span> | <span class="text-red-800 font-medium">{thesis["conference_full"]}</span></div>
-      <p class="mt-2 text-gray-600">{authors}</p>
+      <h2 class="text-lg font-semibold text-gray-900 md:mt-0">{thesis["title"]}</h2>
+      <div class="mt-2 text-gray-600">{authors}</div>
+      <div class="uppercase text-base mt-0.5 text-gray-600 font-bold">{thesis["conference"]}{f' | <span class="text-red-800 font-medium">{thesis["special_notes"]}</span>' if thesis.get("special_notes") else ''}</div>
       <div class="mt-2">
         {paper_link}
       </div>
@@ -188,7 +184,7 @@ def generate_highlights_html(publications):
       </div>
     </div>
     <hr class="my-1 border-gray-200" />
-    <div class="bg-white overflow-hidden md:max-w-4xl">
+    <div class="bg-white overflow-hidden">
 ''' + '\n'.join(pubs_html) + '''
     </div>
   </div>
