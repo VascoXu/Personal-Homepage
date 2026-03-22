@@ -5,7 +5,7 @@ special_notes: "(TVCG Special Issue)"
 authors: "**Vasco Xu**, Brian Chen, Eric J Gonzalez, Andrea Colaço, Henry Hoffmann, Mar Gonzalez-Franco, Karan Ahuja"
 teaser: "static/assets/pubs/teasers/SurfaceXR.gif"
 paper_url: ""
-video_url: ""
+video_url: "https://www.youtube.com/watch?v=58lyf6TWnDE"
 code_url: ""
 year: 2026
 featured: true
