@@ -8,5 +8,5 @@ video_url: "https://www.youtube.com/watch?v=cN75eFHdCyE&ab_channel=SPICELab"
 code_url: "https://github.com/SPICExLAB/MobilePoser"
 year: 2024
 featured: true
-order: 3
+order: 4
 ---
