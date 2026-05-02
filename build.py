@@ -62,7 +62,7 @@ def render_publication_html(pub):
     <!-- Publication Entry -->
     <div class="flex flex-col md:flex-row md:items-center bg-white mt-8">
       <!-- Teaser Image -->
-      <div class="md:w-1/4 mt-1">
+      <div class="md:w-1/3 mt-1">
         {teaser_html}
       </div>
 
@@ -92,7 +92,7 @@ def generate_highlights_html(publications):
 
     html = '''
 <!-- Publications -->
-<div class="container mx-auto max-w-7xl px-6 py-8">
+<div class="container mx-auto max-w-5xl px-6 py-8">
   <div class="flex flex-col">
     <div class="mb-4">
       <h2 class="text-2xl font-bold">Selected Publications</h2>
@@ -136,18 +136,8 @@ def build_static_site():
 
     # Replace Jinja2 syntax with actual content
     index_html = layout.replace('{% block title %}{% endblock %}', 'Vasco Xu')
-    index_html = index_html.replace('{% block nav_home %}{% endblock %}', 'underline underline-offset-8 decoration-2 decoration-pink-500')
     index_html = index_html.replace("{{url_for('static',filename='dist/css/tailwind.css')}}", 'static/dist/css/tailwind.css')
-    # Handle body block with flexible whitespace matching
     index_html = re.sub(r'{%\s*block\s+body\s*%}.*?{%\s*endblock\s*%}', body_content, index_html, flags=re.DOTALL)
-
-    # Remove the tailwind config script since we're using compiled CSS
-    index_html = re.sub(r'<script>\s*tailwind\.config = \{.*?\}\s*</script>', '', index_html, flags=re.DOTALL)
-
-    # Remove Research nav links
-    index_html = re.sub(r'<a href="/research"[^>]*>RESEARCH</a>', '', index_html)
-
-    # Fix navigation links
     index_html = index_html.replace('href="/"', 'href="index.html"')
 
     # Write index.html
