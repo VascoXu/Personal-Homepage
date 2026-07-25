@@ -8,6 +8,6 @@ video_url: ""
 code_url: ""
 year: 2020
 featured: false
-order: 6
+order: 8
 type: "thesis"
 ---

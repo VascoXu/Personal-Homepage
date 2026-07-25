@@ -2,7 +2,22 @@
   "permissions": {
     "allow": [
       "Bash(git -C /Users/vascoxu/Documents/academic-website log --oneline -20)",
-      "Bash(python build.py:*)"
+      "Bash(python build.py:*)",
+      "Bash(sed -i '' 's/^order: 0$/order: 1/' armposer.md)",
+      "Bash(sed -i '' 's/^order: 1$/order: 2/' mario.md)",
+      "Bash(sed -i '' 's/^order: 2$/order: 3/' surfacexr.md)",
+      "Bash(sed -i '' 's/^order: 3$/order: 4/' watchhar.md)",
+      "Bash(sed -i '' 's/^order: 4$/order: 5/' mobileposer.md)",
+      "Bash(sed -i '' 's/^order: 7$/order: 8/' maze-thesis.md)",
+      "Bash(sed -i '' 's/^order: 6$/order: 7/' lush.md xs.md)",
+      "Bash(sed -i '' 's/^order: 5$/order: 6/' mobileposer.md)",
+      "Bash(sed -i '' 's/^order: 4$/order: 5/' watchhar.md)",
+      "Bash(sed -i '' 's/^order: 3$/order: 4/' surfacexr.md)",
+      "Bash(ffmpeg -version)",
+      "Bash(ffmpeg -y -i \"/Users/vascoxu/Desktop/[02] Work/[01] PhD/[02] Demos/[FlowAvatar] Teaser.mp4\" -vf \"fps=15,scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" \"/Users/vascoxu/Documents/academic-website/static/assets/pubs/teasers/FlowAvatar.gif\")",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,avg_frame_rate,duration -of default=noprint_wrappers=1 \"/Users/vascoxu/Desktop/[02] Work/[01] PhD/[02] Demos/[ArmPoser] Cross-User.mov\")",
+      "Bash(ffmpeg -y -i \"/Users/vascoxu/Desktop/[02] Work/[01] PhD/[02] Demos/[ArmPoser] Cross-User.mov\" -vf \"setpts=PTS/1.5,fps=15,scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" \"/Users/vascoxu/Documents/academic-website/static/assets/pubs/teasers/ArmPoser.gif\")",
+      "Bash(./build.sh)"
     ]
   }
 }

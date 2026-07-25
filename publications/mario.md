@@ -7,5 +7,5 @@ paper_url: "https://spice-lab.org/papers/MARIO.pdf"
 video_url: ""
 year: 2026
 featured: true
-order: 1
+order: 3
 ---

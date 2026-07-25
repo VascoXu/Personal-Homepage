@@ -7,6 +7,6 @@ paper_url: "https://dl.acm.org/doi/abs/10.1145/3569009.3572737"
 video_url: "https://www.youtube.com/watch?v=9eFHDUBVYdI&ab_channel=AxLab-ActuatedExperienceLab"
 code_url: ""
 year: 2023
-featured: true
-order: 5
+featured: false
+order: 7
 ---

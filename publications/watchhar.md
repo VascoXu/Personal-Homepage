@@ -8,5 +8,5 @@ video_url: "https://www.youtube.com/watch?v=kKn3T5r7iHs"
 code_url: "https://github.com/SPICExLAB/WatchHAR"
 year: 2025
 featured: true
-order: 3
+order: 5
 ---
