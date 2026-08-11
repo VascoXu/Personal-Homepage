@@ -53,7 +53,7 @@ def render_publication_html(pub):
     video_link = f'<a href="{pub["video_url"]}" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">video</span> ]</a>' if pub.get("video_url") else ''
     code_link = f'<a href="{pub["code_url"]}" target="_blank" class="text-pink-600 hover:text-gray-500 mr-2">[ <span class="hover:underline hover:underline-offset-4">code</span> ]</a>' if pub.get("code_url") else ''
 
-    teaser_html = f'<img src="{pub["teaser"]}" class="object-contain mx-auto" alt="{pub["title"]} Teaser">' if pub.get("teaser") else ''
+    teaser_html = f'<img src="{pub["teaser"]}" class="object-contain mx-auto w-full max-w-lg" alt="{pub["title"]} Teaser">' if pub.get("teaser") else ''
 
     # Format authors (markdown bold ** to HTML)
     authors = re.sub(r'\*\*([^*]+)\*\*', r'<span class="font-medium">\1</span>', pub.get("authors", ""))
