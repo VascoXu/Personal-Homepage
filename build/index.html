@@ -215,5 +215,14 @@
 
     <!-- JavaScript file -->
     <script src="static/scripts/scripts.js"></script>
+    <!-- Temporary: open with ?debug to see the viewport size the browser reports -->
+    <script>
+      if (location.search.includes('debug')) {
+        var d = document.createElement('div');
+        d.style.cssText = 'position:fixed;bottom:8px;left:8px;background:#000;color:#fff;padding:6px 10px;font:12px monospace;z-index:9999;border-radius:4px;max-width:90vw;word-break:break-all';
+        d.textContent = innerWidth + 'x' + innerHeight + ' dpr:' + devicePixelRatio + ' | ' + navigator.userAgent;
+        document.body.appendChild(d);
+      }
+    </script>
 </body>
 </html>
